@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import softuni.exam.instagraphlite.models.dto.UserImportDto;
+
+import softuni.exam.instagraphlite.models.dto.exportDto.UserWithPostsExportDto;
+import softuni.exam.instagraphlite.models.dto.importDto.UserImportDto;
 import softuni.exam.instagraphlite.models.entity.Picture;
 import softuni.exam.instagraphlite.models.entity.User;
 import softuni.exam.instagraphlite.repository.PictureRepository;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static softuni.exam.instagraphlite.constant.File.USERS_JSON;
 import static softuni.exam.instagraphlite.constant.Message.INVALID_USER;
@@ -66,6 +69,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String exportUsersWithTheirPosts() {
-        return null;
+        return
+          userRepository
+            .getAllOrderByPostsSizeAndId()
+            .stream()
+            .map(u -> mapper.map(u, UserWithPostsExportDto.class))
+            .map(UserWithPostsExportDto::toString)
+            .collect(Collectors.joining(System.lineSeparator()));
+
     }
 }

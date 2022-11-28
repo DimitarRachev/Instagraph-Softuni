@@ -1,4 +1,4 @@
-package softuni.exam.instagraphlite.models.dto;
+package softuni.exam.instagraphlite.models.dto.importDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

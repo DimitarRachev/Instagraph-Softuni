@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import softuni.exam.instagraphlite.models.dto.PictureImportDto;
+import softuni.exam.instagraphlite.models.dto.importDto.PictureImportDto;
 import softuni.exam.instagraphlite.models.entity.Picture;
 import softuni.exam.instagraphlite.repository.PictureRepository;
 import softuni.exam.instagraphlite.service.PictureService;
