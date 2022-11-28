@@ -76,6 +76,5 @@ public class UserServiceImpl implements UserService {
             .map(u -> mapper.map(u, UserWithPostsExportDto.class))
             .map(UserWithPostsExportDto::toString)
             .collect(Collectors.joining(System.lineSeparator()));
-
     }
 }

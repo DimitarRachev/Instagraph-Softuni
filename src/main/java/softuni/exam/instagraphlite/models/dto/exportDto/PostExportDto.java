@@ -13,8 +13,9 @@ public class PostExportDto {
 
 
   @Override public String toString() {
-    return "==Post Details: \n" +
-      "----Caption: " + caption + "\n" +
-      "----Picture Size: " + pictureSize;
+    return
+      String.format("==Post Details:%n" +
+        "----Caption: %s%n" +
+        "----Picture Size: %.2f", caption, pictureSize);
   }
 }

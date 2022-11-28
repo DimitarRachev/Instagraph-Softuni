@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import softuni.exam.instagraphlite.models.dto.exportDto.PictureExportDto;
 import softuni.exam.instagraphlite.models.dto.importDto.PictureImportDto;
 import softuni.exam.instagraphlite.models.entity.Picture;
 import softuni.exam.instagraphlite.repository.PictureRepository;
@@ -17,6 +19,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static softuni.exam.instagraphlite.constant.File.PICTURES_JSON;
 import static softuni.exam.instagraphlite.constant.Message.INVALID_PICTURE;
@@ -58,6 +61,10 @@ public class PictureServiceImpl implements PictureService {
 
     @Override
     public String exportPictures() {
-        return null;
+       return pictureRepository.findAllBySizeGreaterThanOrderBySize(30000.0)
+          .stream()
+          .map(p -> mapper.map(p, PictureExportDto.class))
+          .map(p ->String.format("%.2f - %s", p.getSize(), p.getPath()))
+          .collect(Collectors.joining(System.lineSeparator()));
     }
 }
